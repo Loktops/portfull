@@ -1,0 +1,17 @@
+<!-- filepath: core/portifull/templates/base.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Portifull{% endblock %}</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    {% include "partials/header.html" %}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    {% include "partials/footer.html" %}
+</body>
+</html>

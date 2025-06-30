@@ -1,0 +1,15 @@
+
+    <form action="{% url 'sing' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Usuario" name="username" required>
+        <br>
+        <input type="text" placeholder="Nome Inteiro" name="name" required>
+        <br>
+        <input type="text" placeholder="Email" name="email" >
+        <br>
+        <input type="text" placeholder="Senha" name="password" required>
+        <br>  
+        <input type="submit" value="cadastrar">
+        <br>   
+    </form>
+
