@@ -1,0 +1,118 @@
+<head>
+  <meta charset="UTF-8">
+  <title>Spinning Cube</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: full;
+      height: full;
+      overflow: hidden;
+      background: black;
+    }
+    canvas {
+      display: flex;
+      justify-content: center;
+        align-items: center;
+        position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80%;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+
+    window.addEventListener('resize', resizeCanvas);
+
+    let angleX = 0;
+    let angleY = 0;
+    let dragging = false;
+    let lastX, lastY;
+
+    document.addEventListener('mousedown', e => {
+      dragging = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+    });
+
+    document.addEventListener('mouseup', () => dragging = false);
+    document.addEventListener('mousemove', e => {
+      if (dragging) {
+        angleY += (e.clientX - lastX) * 0.01;
+        angleX += (e.clientY - lastY) * 0.01;
+        lastX = e.clientX;
+        lastY = e.clientY;
+      }
+    });
+
+    const cubePoints = [
+      [-1, -1, -1], [1, -1, -1],
+      [1, 1, -1], [-1, 1, -1],
+      [-1, -1, 1], [1, -1, 1],
+      [1, 1, 1], [-1, 1, 1]
+    ];
+
+    const edges = [
+      [0,1], [1,2], [2,3], [3,0],
+      [4,5], [5,6], [6,7], [7,4],
+      [0,4], [1,5], [2,6], [3,7]
+    ];
+
+    function rotate([x, y, z], ax, ay) {
+      let cosY = Math.cos(ay), sinY = Math.sin(ay);
+      let cosX = Math.cos(ax), sinX = Math.sin(ax);
+
+      let dx = cosY * x - sinY * z;
+      let dz = sinY * x + cosY * z;
+      let dy = cosX * y - sinX * dz;
+      dz = sinX * y + cosX * dz;
+      return [dx, dy, dz];
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let projected = cubePoints.map(p => {
+        let [x, y, z] = rotate(p, angleX, angleY);
+        let scale = 700 / (z + 5); // Aumentado em 20% em relacao ao 300 original
+        return [x * scale, y * scale];
+      });
+
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+
+      ctx.save();
+      ctx.translate(centerX, centerY);
+
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 2;
+      for (let [a, b] of edges) {
+        let [x1, y1] = projected[a];
+        let [x2, y2] = projected[b];
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      }
+
+      ctx.restore();
+    }
+
+    function loop() {
+      angleY += 0.01;
+      draw();
+      requestAnimationFrame(loop);
+    }
+    loop();
+  </script>
+</body>

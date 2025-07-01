@@ -1,11 +1,22 @@
-
-    <form action="{% url 'logon'%}" method="post">
-        {% csrf_token %}
-        <input type="text" placeholder="Usuario" name="username" required>
-        <br>
-        <input type="text" placeholder="Senha" name="password" required>
-        <br>  
-        <input type="submit" value="logar">
-        <br>   
-    </form>
-
+<script src="https://cdn.tailwindcss.com"></script>
+<body class="h-full w-full flex items-center justify-between bg-black">
+    <div class="w-full">
+        {% include "partials/cubo.html" %}
+    </div>
+    <div class="w-[45rem] h-full bg-zinc-900 flex items-center justify-center flex-col"> 
+        <div>
+        <h2 class="text-2xl text-white mb-4">Login</h2>
+        </div>
+        <form action="{% url 'logon'%}" method="post" class="backdrop-blur-md bg-black/25 border border-white/40 flex p-6 rounded-lg shadow-lg w-80 space-y-2 justify-center text-center flex-col">
+            {% csrf_token %}
+            <input class="bg-zinc-950 rounded-lg p-2 text-white focus:placeholder-black" type="text" placeholder="Usuario" name="username" required>
+            <br>
+            <input class="bg-zinc-950 rounded-lg p-2 text-white hover:bg-black" type="text" placeholder="Senha" name="password" required>
+            <br>  
+            <input type="submit" value="logar" class="bg-zinc-700 text-white p-2 rounded-md hover:bg-zinc-800">
+            <br> 
+            <a href="{% url 'sing'  %}" class="text-white hover:underline cursor-pointer"> Não tem conta? </a>
+            <br> 
+        </form>
+    </div>
+</body>

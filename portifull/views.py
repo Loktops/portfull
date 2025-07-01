@@ -22,9 +22,10 @@ def sing(request):
         email_exists = User.objects.filter(email=email).first()
         if email_exists:
             return http.HttpResponse('Email já cadastrado')
-        # Cria o usuário
-        user = User.objects.create_user(username=username, email=email, password=password)
-        user.save()
+        
+        # Cria o usuáriouser 
+        User.objects.create_user(username=username, email=email, password=password)
+        User.save()
         return http.HttpResponse('Usuario criado com sucesso')
 
 def logon(request):
@@ -49,6 +50,7 @@ def home(request):
         return render(request, 'home.html')
     else:
         return http.HttpResponse('Você não está logado')
+    
 def logout_view(request):
     logout(request)
     return redirect('logon')

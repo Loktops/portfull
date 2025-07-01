@@ -1,15 +1,21 @@
-
-    <form action="{% url 'sing' %}" method="post">
-        {% csrf_token %}
-        <input type="text" placeholder="Usuario" name="username" required>
-        <br>
-        <input type="text" placeholder="Nome Inteiro" name="name" required>
-        <br>
-        <input type="text" placeholder="Email" name="email" >
-        <br>
-        <input type="text" placeholder="Senha" name="password" required>
-        <br>  
-        <input type="submit" value="cadastrar">
-        <br>   
-    </form>
-
+<script src="https://cdn.tailwindcss.com"></script>
+    <div class="flex items-center justify-center h-screen w-full bg-black">
+        <div>
+        {% include "partials/stars.html" %}
+    </div>
+            <form action="{% url 'sing' %}" method="post" class="bg-zinc-900 w-96 h-auto m-4 backdrop-blur-md bg-black/25 border border-white/40 flex p-6 rounded-lg shadow-lg w-80 space-y-2 justify-center text-center flex-col">
+                {% csrf_token %}
+                <h2 class="text-2xl text-white mb-4">Cadastro</h2>
+                <input type="text" placeholder="Usuario" name="username" class="bg-zinc-950 rounded-lg p-2 text-white focus:placeholder-black" required>
+                <br>
+                <input type="text" placeholder="Nome Inteiro" name="name" class="bg-zinc-950 rounded-lg p-2 text-white focus:placeholder-black" required>
+                <br>
+                <input type="text" placeholder="Email" name="email" class="bg-zinc-950 rounded-lg p-2 text-white focus:placeholder-black" >
+                <br>
+                <input type="text" placeholder="Senha" name="password" class="bg-zinc-950 rounded-lg p-2 text-white focus:placeholder-black" required>
+                <br>  
+                <input type="submit" class="bg-zinc-700 text-white p-2 rounded-md hover:bg-zinc-800"value="cadastrar">
+                <br>   
+            </form>
+        </div>
+    </div>
