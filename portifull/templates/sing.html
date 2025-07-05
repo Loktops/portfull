@@ -1,3 +1,5 @@
+{% load static %}
+{% load socialaccount %}
 <script src="https://cdn.tailwindcss.com"></script>
     <div class="flex items-center justify-center h-screen w-full bg-black">
         <div>
@@ -6,16 +8,30 @@
             <form action="{% url 'sing' %}" method="post" class="bg-zinc-900 w-96 h-auto m-4 backdrop-blur-md bg-black/25 border border-white/40 flex p-6 rounded-lg shadow-lg w-80 space-y-2 justify-center text-center flex-col">
                 {% csrf_token %}
                 <h2 class="text-2xl text-white mb-4">Cadastro</h2>
-                <input type="text" placeholder="Usuario" name="username" class="bg-zinc-950 rounded-lg p-2 text-white focus:placeholder-black" required>
+                <input type="text" placeholder="Usuario" name="username" class="bg-zinc-950 rounded-lg p-2 text-white focus:placeholder-white" required>
                 <br>
-                <input type="text" placeholder="Nome Inteiro" name="name" class="bg-zinc-950 rounded-lg p-2 text-white focus:placeholder-black" required>
+                <input type="text" placeholder="Nome Inteiro" name="name" class="bg-zinc-950 rounded-lg p-2 text-white focus:placeholder-white" required>
                 <br>
-                <input type="text" placeholder="Email" name="email" class="bg-zinc-950 rounded-lg p-2 text-white focus:placeholder-black" >
+                <input type="text" placeholder="Email" name="email" class="bg-zinc-950 rounded-lg p-2 text-white focus:placeholder-white" >
                 <br>
-                <input type="text" placeholder="Senha" name="password" class="bg-zinc-950 rounded-lg p-2 text-white focus:placeholder-black" required>
+                <input type="text" placeholder="Senha" name="password" class="bg-zinc-950 rounded-lg p-2 text-white focus:placeholder-white" required>
                 <br>  
                 <input type="submit" class="bg-zinc-700 text-white p-2 rounded-md hover:bg-zinc-800"value="cadastrar">
-                <br>   
+                <br>
+                <div class="flex justify-between">
+                    <a href="{% provider_login_url 'google' process='login' %}" class="bg-white text-black p-2 rounded-md hover:bg-gray-200 w-36 flex items-center justify-center gap-2">
+                    <!-- Google SVG -->
+                    <svg class="w-5 h-5" viewBox="0 0 48 48"><g><path d="M44.5 20H24v8.5h11.7C34.7 33.9 29.8 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 6 .9 8.3 2.7l6.2-6.2C34.2 4.5 29.4 2.5 24 2.5 12.7 2.5 3.5 11.7 3.5 23S12.7 43.5 24 43.5c10.5 0 20-7.7 20-20 0-1.3-.1-2.7-.5-3.5z" fill="#FFC107"/><path d="M6.3 14.7l7 5.1C15.2 17.1 19.2 14 24 14c3.1 0 6 .9 8.3 2.7l6.2-6.2C34.2 4.5 29.4 2.5 24 2.5c-7.2 0-13 5.8-13 13 0 1.6.3 3.1.8 4.5z" fill="#FF3D00"/><path d="M24 44c5.8 0 10.7-1.9 14.3-5.2l-6.6-5.4C29.9 35.1 27.1 36 24 36c-5.7 0-10.5-3.7-12.2-8.8l-7 5.4C7.2 39.5 14.9 44 24 44z" fill="#4CAF50"/><path d="M44.5 20H24v8.5h11.7c-1.1 3.1-4.1 5.5-7.7 5.5-2.2 0-4.2-.7-5.7-2l-7 5.4C18.6 41.1 21.2 42 24 42c10.5 0 20-7.7 20-20 0-1.3-.1-2.7-.5-3.5z" fill="#1976D2"/></g></svg>
+                    Google
+                    </a>
+                    <a href="{% provider_login_url 'github' process='login' %}" class="bg-slate-950 text-white p-2 rounded-md hover:bg-zinc-800 w-36 flex items-center justify-center gap-2">
+                        <!-- GitHub SVG -->
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.75.41-1.27.74-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.7.42.36.79 1.08.79 2.18 0 1.58-.01 2.85-.01 3.24 0 .31.21.68.8.56C20.71 21.39 24 17.08 24 12c0-6.27-5.23-11.5-12-11.5z"/></svg>
+                        GitHub
+                    </a>
+                </div>
+                <a href="{% url 'logon'  %}" class="text-white hover:underline cursor-pointer mt-8"> voltar</a>
             </form>
+
         </div>
     </div>
